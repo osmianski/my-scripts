@@ -1,0 +1,17 @@
+{
+    "name": "osmianski/my-scripts",
+    "autoload": {
+        "psr-4": {
+            "Osmianski\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "osmscripts/core": "1.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
+}
