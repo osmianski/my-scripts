@@ -12,6 +12,12 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
+        },
+        "mymage2": {
+            "commands": {
+                "create:links": "Osmianski\\MyMage2\\Commands\\CreateLinks",
+                "delete:links": "Osmianski\\MyMage2\\Commands\\DeleteLinks"
+            }
         }
     },
     "bin": [
