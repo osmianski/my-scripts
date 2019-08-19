@@ -27,6 +27,11 @@ class Mage extends Object_
         if (!isset($this->project->packages['magento/product-community-edition'])) {
             throw new Exception("'{$this->project->path}' is not Magento 2 project directory");
         }
+    }
 
+    public function verifyManadev() {
+        if (!is_dir('manadev-products')) {
+            throw new Exception("'manadev-products' directory not found");
+        }
     }
 }

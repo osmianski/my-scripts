@@ -36,6 +36,7 @@ class CreateLinks extends Command
 
     protected function handle() {
         $this->mage->verify();
+        $this->mage->verifyManadev();
 
         foreach($this->links->get() as $link => $target) {
             $this->files->createLink($target, $link);

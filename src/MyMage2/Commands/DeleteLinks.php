@@ -36,6 +36,7 @@ class DeleteLinks extends Command
 
     protected function handle() {
         $this->mage->verify();
+        $this->mage->verifyManadev();
 
         foreach (array_reverse(array_keys($this->links->get())) as $link) {
             $this->files->deleteLink($link);
