@@ -30,7 +30,7 @@ class DeleteLinks extends Command
             case 'mage': return $this->mage = $script->singleton(Mage::class);
         }
 
-        return null;
+        return parent::__get($property);
     }
     #endregion
 

@@ -20,7 +20,7 @@ class Mage extends Object_
             case 'project': return $this->project = new Project(['path' => $script->cwd]);
         }
 
-        return null;
+        return parent::__get($property);
     }
 
     public function verify() {
