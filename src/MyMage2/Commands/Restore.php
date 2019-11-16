@@ -20,17 +20,17 @@ use OsmScripts\Core\Shell;
 class Restore extends Command
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         /* @var Script $script */
         global $script;
 
         switch ($property) {
-            case 'mage': return $this->mage = $script->singleton(Mage::class);
-            case 'shell': return $this->shell = $script->singleton(Shell::class);
-            case 'filename': return $this->filename = "{$script->cwd}/var/db.sql";
+            case 'mage': return $script->singleton(Mage::class);
+            case 'shell': return $script->singleton(Shell::class);
+            case 'filename': return "{$script->cwd}/var/db.sql";
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 

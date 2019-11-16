@@ -18,23 +18,23 @@ use OsmScripts\Core\Script;
  */
 class Mage extends Object_
 {
-    public function __get($property) {
+    public function default($property) {
         /* @var Script $script */
         global $script;
 
         switch ($property) {
-            case 'project': return $this->project = new Project(['path' => $script->cwd]);
-            case 'env_filename': return $this->env_filename = "{$script->cwd}/app/etc/env.php";
+            case 'project': return new Project(['path' => $script->cwd]);
+            case 'env_filename': return "{$script->cwd}/app/etc/env.php";
             case 'env':
                 /** @noinspection PhpIncludeInspection */
-                return $this->env = include $this->env_filename;
-            case 'db_host': return $this->db_host = $this->env['db']['connection']['default']['host'];
-            case 'db_user': return $this->db_user = $this->env['db']['connection']['default']['username'];
-            case 'db_password': return $this->db_password = $this->env['db']['connection']['default']['password'];
-            case 'db_name': return $this->db_name = $this->env['db']['connection']['default']['dbname'];
+                return include $this->env_filename;
+            case 'db_host': return $this->env['db']['connection']['default']['host'];
+            case 'db_user': return $this->env['db']['connection']['default']['username'];
+            case 'db_password': return $this->env['db']['connection']['default']['password'];
+            case 'db_name': return $this->env['db']['connection']['default']['dbname'];
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
 
     public function verify() {

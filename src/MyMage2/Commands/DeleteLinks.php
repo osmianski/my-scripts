@@ -20,17 +20,17 @@ use OsmScripts\Core\Script;
 class DeleteLinks extends Command
 {
     #region Properties
-    public function __get($property) {
+    public function default($property) {
         /* @var Script $script */
         global $script;
 
         switch ($property) {
-            case 'links': return $this->links = $script->singleton(Links::class);
-            case 'files': return $this->files = $script->singleton(Files::class);
-            case 'mage': return $this->mage = $script->singleton(Mage::class);
+            case 'links': return $script->singleton(Links::class);
+            case 'files': return $script->singleton(Files::class);
+            case 'mage': return $script->singleton(Mage::class);
         }
 
-        return parent::__get($property);
+        return parent::default($property);
     }
     #endregion
 
