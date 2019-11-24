@@ -20,6 +20,11 @@
                 "backup": "Osmianski\\MyMage2\\Commands\\Backup",
                 "restore": "Osmianski\\MyMage2\\Commands\\Restore"
             }
+        },
+        "deploy": {
+            "commands": {
+                "beta.osmdocs.com": "Osmianski\\Deploy\\Commands\\BetaOsmdocsCom"
+            }
         }
     },
     "bin": [
