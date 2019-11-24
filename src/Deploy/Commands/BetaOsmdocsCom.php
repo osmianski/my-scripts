@@ -51,7 +51,8 @@ class BetaOsmdocsCom extends Command
 
         $this->shell->cd($this->root_path, function() {
             $this->shell->run("git pull");
-            $this->shell->run("composer update");
+            $this->shell->run("composer update --no-scripts");
+            $this->shell->run("php fresh");
         });
 
         $this->shell->run("supervisorctl reread");
