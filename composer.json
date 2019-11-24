@@ -25,7 +25,6 @@
     "bin": [
         "mymage1",
         "mymage2",
-        "my",
-        "update:osmdocs.com"
+        "my"
     ]
 }
