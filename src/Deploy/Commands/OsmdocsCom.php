@@ -12,14 +12,13 @@ use OsmScripts\Core\Shell;
  * `beta.osmdocs.com` shell command class.
  *
  * @property Shell $shell @required Helper for running commands in local shell
+ * @property string $project Project directory name
+ * @property string $user Linux user, project directory owner
  * @property string $path Normal project path
  * @property string $root_path Path of root user's project
  */
-class BetaOsmdocsCom extends Command
+class OsmdocsCom extends Command
 {
-    public $project = 'beta.osmdocs.com';
-    public $user = 'vagrant';
-
     #region Properties
     public function default($property) {
         /* @var Script $script */
@@ -27,6 +26,8 @@ class BetaOsmdocsCom extends Command
 
         switch ($property) {
             case 'shell': return $script->singleton(Shell::class);
+            case 'project': return $this->getName();
+            case 'user': return $this->project == 'osmdocs.com' ? 'vo' : 'vagrant';
             case 'path': return "/projects/{$this->project}";
             case 'root_path': return "/projects/root.{$this->project}";
         }

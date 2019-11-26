@@ -23,7 +23,8 @@
         },
         "deploy": {
             "commands": {
-                "beta.osmdocs.com": "Osmianski\\Deploy\\Commands\\BetaOsmdocsCom"
+                "beta.osmdocs.com": "Osmianski\\Deploy\\Commands\\OsmdocsCom",
+                "osmdocs.com": "Osmianski\\Deploy\\Commands\\OsmdocsCom"
             }
         }
     },
