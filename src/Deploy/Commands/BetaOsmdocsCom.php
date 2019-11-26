@@ -44,12 +44,14 @@ class BetaOsmdocsCom extends Command
 
         $this->shell->su($this->user, function() {
             $this->shell->cd($this->path, function() {
+                $this->shell->run("git reset --hard HEAD");
                 $this->shell->run("git pull");
                 $this->shell->run("composer update");
             });
         });
 
         $this->shell->cd($this->root_path, function() {
+            $this->shell->run("git reset --hard HEAD");
             $this->shell->run("git pull");
             $this->shell->run("composer update --no-scripts");
             $this->shell->run("php fresh");
