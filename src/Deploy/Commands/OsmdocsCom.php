@@ -27,7 +27,7 @@ class OsmdocsCom extends Command
         switch ($property) {
             case 'shell': return $script->singleton(Shell::class);
             case 'project': return $this->getName();
-            case 'user': return $this->project == 'osmdocs.com' ? 'vo' : 'vagrant';
+            case 'user': return 'vo';
             case 'path': return "/projects/{$this->project}";
             case 'root_path': return "/projects/root.{$this->project}";
         }
@@ -46,8 +46,8 @@ class OsmdocsCom extends Command
         $this->shell->su($this->user, function() {
             $this->shell->cd($this->path, function() {
                 $this->shell->run("git reset --hard HEAD");
-                $this->shell->run("git pull");
-                $this->shell->run("composer update --no-scripts");
+                $this->shell->run("git pull origin v1");
+                $this->shell->run("composer install --no-scripts");
                 $this->shell->run("php run config:npm");
                 $this->shell->run("npm install");
                 $this->shell->run("npm run webpack");
@@ -56,8 +56,8 @@ class OsmdocsCom extends Command
 
         $this->shell->cd($this->root_path, function() {
             $this->shell->run("git reset --hard HEAD");
-            $this->shell->run("git pull");
-            $this->shell->run("composer update --no-scripts");
+            $this->shell->run("git pull origin v1");
+            $this->shell->run("composer install --no-scripts");
             $this->shell->run("php fresh");
         });
 
