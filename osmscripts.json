@@ -1,0 +1,16 @@
+{
+    "mymage2": {
+        "commands": {
+            "create:links": "Osmianski\\MyMage2\\Commands\\CreateLinks",
+            "delete:links": "Osmianski\\MyMage2\\Commands\\DeleteLinks",
+            "backup": "Osmianski\\MyMage2\\Commands\\Backup",
+            "restore": "Osmianski\\MyMage2\\Commands\\Restore"
+        }
+    },
+    "deploy": {
+        "commands": {
+            "beta.osmdocs.com": "Osmianski\\Deploy\\Commands\\OsmdocsCom",
+            "osmdocs.com": "Osmianski\\Deploy\\Commands\\OsmdocsCom"
+        }
+    }
+}
