@@ -12,5 +12,10 @@
             "beta.osmdocs.com": "Osmianski\\Deploy\\Commands\\OsmdocsCom",
             "osmdocs.com": "Osmianski\\Deploy\\Commands\\OsmdocsCom"
         }
+    },
+    "my": {
+        "commands": {
+            "test": "Osmianski\\Commands\\Test"
+        }
     }
 }
