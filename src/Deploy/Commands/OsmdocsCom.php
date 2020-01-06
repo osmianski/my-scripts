@@ -62,7 +62,7 @@ class OsmdocsCom extends Command
         });
 
         $this->shell->run("supervisorctl reread");
-        $this->shell->run("supervisorctl update {$this->project}__queue {$this->project}__watch_data");
-        $this->shell->run("supervisorctl start {$this->project}__queue:* {$this->project}__watch_data:*");
+        $this->shell->run("supervisorctl update {$this->project}__default_queue {$this->project}__privileged_queue {$this->project}__watch_data");
+        $this->shell->run("supervisorctl start {$this->project}__default_queue:* {$this->project}__privileged_queue:* {$this->project}__watch_data:*");
     }
 }
