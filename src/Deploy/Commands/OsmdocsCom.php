@@ -16,6 +16,10 @@ use OsmScripts\Core\Shell;
  * @property string $user Linux user, project directory owner
  * @property string $path Normal project path
  * @property string $root_path Path of root user's project
+ *
+ * @property string[] $services
+ * @property string $services_
+ * @property string $services__
  */
 class OsmdocsCom extends Command
 {
@@ -30,6 +34,13 @@ class OsmdocsCom extends Command
             case 'user': return 'vo';
             case 'path': return "/projects/{$this->project}";
             case 'root_path': return "/projects/root.{$this->project}";
+            case 'services': return [ 'default_queue', 'privileged_queue', 'watch_data'];
+            case 'services_': return implode(' ', array_map(function($service) {
+                return "{$this->project}__{$service}";
+            }, $this->services));
+            case 'services__': return implode(' ', array_map(function($service) {
+                return "{$this->project}__{$service}:*";
+            }, $this->services));
         }
 
         return parent::default($property);
@@ -41,7 +52,7 @@ class OsmdocsCom extends Command
     }
 
     protected function handle() {
-        $this->shell->run("supervisorctl stop {$this->project}__queue:* {$this->project}__watch_data:*");
+        $this->shell->run("supervisorctl stop {$this->services__}");
 
         $this->shell->su($this->user, function() {
             $this->shell->cd($this->path, function() {
@@ -63,7 +74,7 @@ class OsmdocsCom extends Command
         });
 
         $this->shell->run("supervisorctl reread");
-        $this->shell->run("supervisorctl update {$this->project}__default_queue {$this->project}__privileged_queue {$this->project}__watch_data");
-        $this->shell->run("supervisorctl start {$this->project}__default_queue:* {$this->project}__privileged_queue:* {$this->project}__watch_data:*");
+        $this->shell->run("supervisorctl update {$this->services_}");
+        $this->shell->run("supervisorctl start {$this->services__}");
     }
 }
