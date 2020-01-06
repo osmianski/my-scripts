@@ -58,7 +58,7 @@ class OsmdocsCom extends Command
             $this->shell->cd($this->path, function() {
                 $this->shell->run("git reset --hard HEAD");
                 $this->shell->run("git pull origin v1");
-                $this->shell->run("composer update --no-scripts");
+                $this->shell->run("composer install --no-scripts");
                 $this->shell->run("php run migrations");
                 $this->shell->run("php run config:npm");
                 $this->shell->run("npm install");
@@ -69,7 +69,7 @@ class OsmdocsCom extends Command
         $this->shell->cd($this->root_path, function() {
             $this->shell->run("git reset --hard HEAD");
             $this->shell->run("git pull origin v1");
-            $this->shell->run("composer update --no-scripts");
+            $this->shell->run("composer install --no-scripts");
             $this->shell->run("php fresh");
         });
 
