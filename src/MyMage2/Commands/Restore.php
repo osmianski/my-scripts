@@ -42,6 +42,9 @@ class Restore extends Command
         $this->output->writeln("Dropping all tables ...");
         $this->dropAllTables();
 
+        $this->output->writeln("Dropping all procedures ...");
+        $this->dropAllProcedures();
+
         $this->shell->run("mysql -h \"{$this->mage->db_host}\" " .
             "-u \"{$this->mage->db_user}\" \"-p{$this->mage->db_password}\" " .
             "\"{$this->mage->db_name}\" < {$this->filename}"
@@ -60,5 +63,16 @@ class Restore extends Command
         }
 
         $db->exec('SET FOREIGN_KEY_CHECKS=1;');
+    }
+
+    protected function dropAllProcedures() {
+        $db = new \PDO("mysql:host={$this->mage->db_host};dbname={$this->mage->db_name}",
+            $this->mage->db_user, $this->mage->db_password);
+
+        foreach ($db->query("SHOW PROCEDURE STATUS WHERE db = '{$this->mage->db_name}'") as $row) {
+            $row = (array)$row;
+            $procedure = $row['Name'] ?? $row['name'] ?? $row['NAME'];
+            $db->exec("DROP PROCEDURE `{$procedure}`");
+        }
     }
 }
