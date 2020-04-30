@@ -11,10 +11,12 @@ use OsmScripts\Core\Script;
  * @property Project $project @required
  * @property string $env_filename @required
  * @property array $env @required
+ * @property string $db_prefix @required
  * @property string $db_host @required
  * @property string $db_user @required
  * @property string $db_password @required
  * @property string $db_name @required
+ * @property string $version @required
  */
 class Mage extends Object_
 {
@@ -28,10 +30,13 @@ class Mage extends Object_
             case 'env':
                 /** @noinspection PhpIncludeInspection */
                 return include $this->env_filename;
+            case 'db_prefix': return $this->env['db']['table_prefix'];
             case 'db_host': return $this->env['db']['connection']['default']['host'];
             case 'db_user': return $this->env['db']['connection']['default']['username'];
             case 'db_password': return $this->env['db']['connection']['default']['password'];
             case 'db_name': return $this->env['db']['connection']['default']['dbname'];
+            case 'version': return $this->project
+                ->packages['magento/product-community-edition']->lock->version;
         }
 
         return parent::default($property);
